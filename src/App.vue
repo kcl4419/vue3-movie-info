@@ -17,26 +17,35 @@
       - 일반 : {{ 변수명 }}
       - 속성 : 속성명="변수명"
       -->
-      <button v-on:click="increseLike(i)">좋아요</button> <span>{{ movie.like }}</span>
+      <button v-on:click="increseLike(i)">좋아요</button> 
       <!-- v-on 축약형 : @ -->
+      <span>{{ movie.like }}</span>
+      <p>
+        <button  @click="isModal = true">상세보기</button>
+      </p>
+      
 
     </div>
-    <!-- <p>{{ foods[0] }}</p>
-    <p>{{ foods[1] }}</p>
-    <p>{{ foods[2] }}</p> -->
-    <p v-for="(item, i) in foods" :key="i">
-      {{ item }}
-    </p>
   </div>
+<div class="modal" v-if="isModal">
+  <div class="inner">
+    <h3>Detail</h3>
+    <p>영화 상세보기</p>
+    <button @click="isModal = false">닫기</button>
+  </div>
+</div>
 
 </template>
 
 <script>
+import { food, city } from './assets/movies';
+console.log(food, city);
 // 자바스크립트
   export default{
     nmae:'App', //컨포넌트명 기재
     data(){ //문서에 표시될 변수, return필수
       return{
+        isModal:false,
         data:[
           {
             title:"노량",
@@ -95,6 +104,7 @@ p {
 }
 button {
   margin-right: 10px;
+  margin-top: 1rem;
 }
 .item {
   width: 100%;
@@ -112,5 +122,23 @@ button {
 }
 .item .info {
   width: 100%;
+}
+.modal {
+  background-color: rgba(0, 0, 0, 0.7);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+}
+.modal .inner {
+  background: #fff;
+  width: 80%;
+  padding: 20px;
+  border-radius: 10px;
 }
 </style>
