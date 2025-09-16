@@ -21,7 +21,7 @@
       <!-- v-on 축약형 : @ -->
       <span>{{ movie.like }}</span>
       <p>
-        <button  @click="isModal = true">상세보기</button>
+        <button  @click="isModal = true; selectedMovie=i">상세보기</button>
       </p>
       
 
@@ -29,7 +29,7 @@
   </div>
 <div class="modal" v-if="isModal">
   <div class="inner">
-    <h3>Detail</h3>
+    <h3>{{data[selectedMovie].title}}</h3>
     <p>영화 상세보기</p>
     <button @click="isModal = false">닫기</button>
   </div>
@@ -38,41 +38,16 @@
 </template>
 
 <script>
-import { food, city } from './assets/movies';
-console.log(food, city);
+import  data  from './assets/movies';
+console.log(data);
 // 자바스크립트
   export default{
     nmae:'App', //컨포넌트명 기재
     data(){ //문서에 표시될 변수, return필수
       return{
         isModal:false,
-        data:[
-          {
-            title:"노량",
-            year : 2023,
-            category : "액션, 드라마",
-            textRed:"color:red",
-            like:0,
-            imgUrl : "/assets/노량.jpg"
-          },
-          {
-            title:"아쿠아맨과 로스트 킹덤",
-            year : 2023,
-            category : "액션, 판타지, 어드벤처",
-            textRed:"color:blue",
-            like:0,
-            imgUrl : "/assets/아쿠아맨.jpg"
-          },
-          {
-            title:"3일의 휴가",
-            year : 2023,
-            category : "판타지 드라마",
-            like:0,
-            imgUrl : "/assets/3일의휴가.jpg"
-          }
-          
-
-        ]
+        data:data,
+        selectedMovie:0
 
       }
 
